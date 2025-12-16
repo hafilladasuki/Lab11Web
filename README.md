@@ -1,99 +1,81 @@
-# Lab 11 web
+# Praktikum 12 – Autentikasi & Session (PHP OOP)
 
+## Deskripsi Singkat
 
-#  **README — Praktikum 11: PHP OOP**
-
-## **1. Deskripsi Singkat**
-
-Project ini merupakan hasil Praktikum 11 Pemrograman Web yang membahas **PHP OOP**, **modularisasi**, dan **routing sederhana** menggunakan mini–framework buatan sendiri.
-Semua halaman dibagi ke dalam modul, dan router mengarahkan URL ke file modul secara otomatis.
+Praktikum ini membahas pembuatan **sistem login dan logout** menggunakan **session PHP** untuk membatasi akses ke halaman tertentu (modul artikel). Hanya user yang sudah login yang dapat mengakses halaman artikel.
 
 ---
 
-## **2. Struktur Folder**
+## Tujuan
+
+* Memahami konsep autentikasi
+* Memahami penggunaan session di PHP
+* Mengamankan halaman dengan login
+
+---
+
+## Struktur Folder Utama
 
 ```
 lab11_php_oop/
-├── assets/css/style.css
-├── auth/
-│   ├── login.php
-│   └── logout.php
-├── class/
-│   ├── Database.php
-│   └── Form.php
-├── module/
-│   ├── artikel/
-│   │   ├── index.php
-│   │   ├── tambah.php
-│   │   └── ubah.php
-│   └── home/index.php
-├── template/
-│   ├── header.php
-│   ├── footer.php
-│   └── sidebar.php
-├── user/
-│   ├── add.php
-│   └── list.php
-├── .htaccess
+├── index.php
 ├── config.php
-└── index.php
+├── class/
+├── module/
+│   ├── home/
+│   ├── artikel/
+│   └── user/
+│       ├── login.php
+│       └── logout.php
+└── template/
 ```
 
 ---
 
-## **3. Cara Kerja Routing**
+## Database
 
-Router membaca URL:
+Membuat tabel `users` untuk menyimpan data admin.
 
+```sql
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50),
+  password VARCHAR(255),
+  nama VARCHAR(100)
+);
 ```
-/modul/halaman
-```
 
-Contoh:
-
-* `/home/index` → `module/home/index.php`
-* `/artikel/index` → `module/artikel/index.php`
-* `/artikel/tambah` → `module/artikel/tambah.php`
-
-Jika tidak ada path, otomatis membuka:
-
-```
-/home/index
-```
+Insert user admin dengan password terenkripsi.
 
 ---
 
-## **4. File Penting**
+## Alur Autentikasi
 
-* **index.php** → router utama
-* **class/Database.php** → koneksi & query database
-* **class/Form.php** → helper form OOP
-* **template/** → header, footer, sidebar
-* **module/** → isi halaman
-
----
-
-## **5. Menjalankan Project**
-
-1. Taruh folder dalam:
-
-   ```
-   C:/xampp/htdocs/lab11_php_oop/
-   ```
-2. Aktifkan Apache & MySQL.
-3. Akses melalui browser:
-
-```
-http://localhost/lab11_php_oop/
-```
+1. User membuka halaman artikel
+2. Jika belum login → diarahkan ke halaman login
+3. User login menggunakan akun admin
+4. Jika berhasil → masuk ke halaman artikel
+5. User dapat logout untuk mengakhiri session
 
 ---
 
-## **6. Kesimpulan**
+## Login & Logout
 
-Praktikum ini berhasil membuat sistem modular sederhana menggunakan konsep PHP OOP, routing, template, dan class helper untuk form & database.
+* **Login**: validasi username dan password menggunakan `password_verify()`
+* **Logout**: menghapus session dan kembali ke halaman login
 
 ---
 
-<p><img width="526" height="334" alt="Screenshot 2025-12-10 000125" src="https://github.com/user-attachments/assets/0dd46b3e-fbad-48ed-b8e9-0990fc6c38b3" />
-</p>
+## Pengujian
+
+1. 
+
+https://github.com/user-attachments/assets/0742a76c-9531-4974-8b79-666428e1fe83
+
+
+
+## Kesimpulan
+
+Dengan autentikasi dan session, aplikasi menjadi lebih aman karena akses halaman admin dibatasi hanya untuk user yang sudah login.
+
+
