@@ -74,6 +74,8 @@ https://github.com/user-attachments/assets/0742a76c-9531-4974-8b79-666428e1fe83
 
 
 
+dan di vidio tersebut beserta dengan tugas menambahkan fitur home untuk mengganti password
+
 ## Kesimpulan
 
 Dengan autentikasi dan session, aplikasi menjadi lebih aman karena akses halaman admin dibatasi hanya untuk user yang sudah login.
